@@ -1,0 +1,44 @@
+﻿@model VolvoProject.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Edit Vehicle";
+    Layout = "_Layout";
+}
+
+<h2>Edit Vehicle Color</h2>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" value="@Model.Id" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Vehicle Type</label>
+        <input type="text" class="form-control" value="@Model.VType" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Chassis Series</label>
+        <input type="text" class="form-control" value="@Model.ChassisSeries" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Chassis Number</label>
+        <input type="number" class="form-control" value="@Model.ChassisNumber" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Number of Passengers</label>
+        <input type="number" class="form-control" value="@Model.NumberOfPassengers" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Color</label>
+        <input type="text" class="form-control" name="color" value="@Model.Color" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Color</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>

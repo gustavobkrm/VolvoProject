@@ -1,0 +1,41 @@
+﻿@model VolvoProject.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Insert Vehicle";
+    Layout = "_Layout";
+
+}
+
+<h2>Insert New Vehicle</h2>
+ 
+@Html.ValidationSummary(true, "", new { @class = "alert alert-warning" })
+
+<form asp-action="Insert" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label for="VType" class="form-label">Vehicle Type</label>
+        <select class="form-control" id="VType" name="VType">
+            <option value="0">Bus</option>
+            <option value="1">Truck</option>
+            <option value="2">Car</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="ChassisSeries" class="form-label">Chassis Series</label>
+        <input type="text" class="form-control" id="ChassisSeries" name="ChassisSeries" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="ChassisNumber" class="form-label">Chassis Number</label>
+        <input type="number" class="form-control" id="ChassisNumber" name="ChassisNumber" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="Color" class="form-label">Color</label>
+        <input type="text" class="form-control" id="Color" name="Color" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Insert Vehicle</button>
+
+</form>

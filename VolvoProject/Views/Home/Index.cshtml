@@ -1,0 +1,68 @@
+﻿@model IEnumerable<VolvoProject.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Registered Vehicles";
+    Layout = "_Layout";
+
+    var chassisIdParam = Context.Request.Query["chassisId"];
+    bool isFiltered = !string.IsNullOrEmpty(chassisIdParam);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Registered Vehicles</h2>
+    <a href="@Url.Action("Insert", "Home")" class="btn btn-primary">Add New Vehicle</a>
+</div>
+
+<form asp-action="Index" method="get" class="mb-4" id="searchForm">
+    <div class="row g-4 align-items-center">
+        <div class="col-4">
+            <input type="text" id="chassisId" class="form-control" name="chassisId" placeholder="Chassis ID (Chassis Series + Chassis Number)" />
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning" role="alert">
+        No vehicles found.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Chassis Id</th>
+                <th>Type</th>
+                <th>Color</th>
+                <th>Number of passengers allowed</th>
+                @if (isFiltered)
+                {
+                    <th>Actions</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model)
+            {
+                <tr>
+                    <td>@vehicle.ChassisSeries@vehicle.ChassisNumber</td>
+                    <td>@vehicle.VType</td>
+                    <td>@vehicle.Color</td>
+                    <td>@vehicle.NumberOfPassengers</td>
+                    @if (isFiltered)
+                    {
+                        <td>
+                            <a href="@Url.Action("Update", "Home", new { id = vehicle.Id })" class="btn btn-sm btn-warning">Edit</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
